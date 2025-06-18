@@ -1,0 +1,209 @@
+* {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f4f8;
+            
+            color: #333;
+         }
+        nav {
+            background-color: #264653;
+            display: flex;
+            justify-content: center;
+            padding: 15px 0;
+        }
+        nav ul {
+            list-style: none;
+            display: flex;
+
+            gap: 30px;
+          }
+        nav li {
+            display: inline;
+        }
+        nav a {
+            
+            color: #2a9d8f;
+            font-weight: bold;
+            text-decoration: none;
+            font-size: 16px;
+            
+        }
+        main {
+            display: flex;
+            justify-content: center;
+            padding: 30px;
+            gap: 20px;
+         }
+        section {
+            background-color: #ffffff;
+            width: 60vw;
+            padding: 20px;
+            border-radius: 10px;
+            
+        }
+        aside {
+            width: 30vw;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 10px;
+            
+           }
+        img {
+            border-radius: 100px;
+        }
+
+
+        section article img {
+            width: 250px;height: auto;
+            display: block;
+            margin: 10px 0;
+            border-radius: 8px;
+            }
+        section article h1 {
+            text-align: center;
+            margin-bottom: 10px;
+            color: #264653;
+        }
+
+        .contenido {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        .contenido img {
+            width: 200px;
+            border-radius: 8px;
+         }
+        .textoarticulo {
+            flex: 1;
+            }
+        .textoarticulo p {
+            margin-bottom: 8px;
+        }
+
+        .textoarticulo a {
+            display: inline-block;
+            background-color: #e76f51;
+            color: white;
+            padding: 8px 12px;
+            border-radius: 5px;
+            text-decoration: none;
+            margin-top: 10px;
+          }
+        .perfil h2, .redes h2, .subscripcion h2 {
+            color: #264653;
+            margin-bottom: 10px;
+            
+        }
+        aside img.perfil {
+            width: 80px;height: 80px;
+            border-radius: 50%;
+            margin-bottom: 10px;
+        }
+        .subscripcion input {
+            width: 100%;
+            padding: 8px;
+            margin-top: 10px;
+            border: 2px solid #2a9d8f;
+            border-radius: 5px;
+        }
+        .subscripcion button {
+            width: 100%;
+            margin-top: 10px;
+            
+            
+            padding: 10px;
+            background-color: #e76f51;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            
+        }
+
+
+        .posteos ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .posteos li a {
+            text-decoration: none;
+            color: #2a9d8f;
+        }
+        footer {
+            background-color: #2a9d8f;
+            color: white;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        hr {
+            margin: 20px 0;
+            border: 0;
+            border-top: 1px solid #ccc;
+           }
+        .redes ul {
+            list-style: none;
+            padding-left: 0;
+            margin: 0;
+        }
+
+
+
+        @media (max-width: 767px) {
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+
+            main {
+                flex-direction: column;
+                padding: 15px;
+            }
+
+            section, aside {
+                width: 100%;
+            }
+
+            .contenido {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            section article img {
+                width: 100%;
+                max-width: 300px;
+                margin: 0 auto;
+            }
+
+            .textoarticulo {
+                width: 100%;
+            }
+        }
+
+    
+        @media (min-width: 1024px) {
+            nav ul {
+                flex-direction: row;
+                justify-content: center;
+            }
+
+            main {
+                flex-direction: row;
+            }
+
+            section {
+                width: 60vw;
+            }
+
+            aside {
+                width: 30vw;
+            }
+        }

@@ -1,0 +1,34 @@
+
+.seccion{
+    display: inline-block; ;
+    margin-left: 20px;
+}
+.barra{
+    background-color: #1E3A5F;  height: 50px;
+    text-align: center;
+    line-height: 50px;
+    margin-top: 0;
+    padding: 0;
+    
+}
+
+nav a {
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: bold;
+
+}
+
+body {
+    text-align: center;  font-family: 'Roboto', sans-serif;
+}
+h1 {
+    style="text-align: center; 
+    background-color:  rgb(159, 179, 223); margin-top: 0;"
+    
+}
+li a {
+    color: #FFFFFF;
+    text-decoration: none;
+    
+}
