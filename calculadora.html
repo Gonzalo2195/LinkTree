@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Calculadora</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f2f5;
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    header {
+      background-color: #ffffff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 2rem;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    nav a {
+      margin-left: 1.5rem;
+      text-decoration: none;
+      color: #1F2937;
+      font-weight: 500;
+      font-size: 1rem;
+      transition: color 0.3s;
+    }
+
+    nav a:hover {
+      color: #605ca5;
+    }
+
+    main {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      color: #1F2937;
+      margin-bottom: 2rem;
+    }
+
+    .calculadora {
+      background: #ffffff;
+      border-radius: 16px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      width: 320px;
+    }
+
+    .visor {
+      background: #f8f9fc;
+      color: #1F2937;
+      font-size: 2rem;
+      text-align: right;
+      padding: 20px;
+      border-radius: 12px;
+      margin-bottom: 20px;
+      min-height: 60px;
+    }
+
+    .input {
+      color: #888888;
+      font-size: 1.2rem;
+    }
+
+    .botones {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .botones button {
+      background: #f1f3f5;
+      border: none;
+      padding: 20px;
+      font-size: 1.2rem;
+      border-radius: 12px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      color: #1F2937;
+    }
+
+    .botones button:hover {
+      background: #e0e3e7;
+    }
+
+    footer {
+      background-color: #ffffff;
+      color: #1F2937;
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      border-top: 1px solid #e5e7eb;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <div><strong>Mi Portfolio.</strong></div>
+    <nav>
+      <a href="portafolio.html#inicio">Inicio</a>
+      <a href="portafolio.html#sobre-mi">Sobre mí</a>
+      <a href="portafolio.html#proyectos">Proyectos</a>
+      <a href="portafolio.html#habilidades">Habilidades</a>
+      <a href="portafolio.html#contacto">Contacto</a>
+      <a href="index.html" target="_blank">Linktree</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>Calculadora</h1>
+    <div class="calculadora">
+      <div class="visor">
+        <span class="resultado"></span><br />
+        <span class="input"></span>
+      </div>
+      <div class="botones">
+        <button>CE</button>
+        <button>AC</button>
+        <button>x²</button>
+        <button>√</button>
+
+        <button>7</button>
+        <button>8</button>
+        <button>9</button>
+        <button>/</button>
+
+        <button>4</button>
+        <button>5</button>
+        <button>6</button>
+        <button>*</button>
+
+        <button>1</button>
+        <button>2</button>
+        <button>3</button>
+        <button>-</button>
+
+        <button>0</button>
+        <button>.</button>
+        <button>=</button>
+        <button>+</button>
+      </div>
+    </div>
+  </main>
+
+  <footer>
+    © 2025 Gonzalo Flores - Todos los derechos reservados.
+  </footer>
+
+  <script>
+    function suma(a, b) {
+      return a + b;
+    }
+
+    function resta(a, b) {
+      return a - b;
+    }
+
+    function multiplicacion(a, b) {
+      return a * b;
+    }
+
+    function division(a, b) {
+      return a / b;
+    }
+
+    function raiz(a) {
+      return Math.sqrt(a);
+    }
+
+    function cuadrado(a) {
+      return a * a;
+    }
+
+    const botones = document.querySelectorAll('button');
+    const inputSpan = document.querySelector('.input');
+    const resultado = document.querySelector('.resultado');
+
+    let inputActual = '';
+    let operador = null;
+    let a = null;
+    let b = null;
+
+    botones.forEach(boton => {
+      boton.addEventListener('click', () => {
+        const valor = boton.textContent;
+
+        if (!isNaN(valor)) {
+          inputActual += valor;
+          inputSpan.textContent = inputActual;
+        } else if (valor === '.') {
+          if (!inputActual.includes('.')) {
+            inputActual += inputActual === '' ? '0.' : '.';
+            inputSpan.textContent = inputActual;
+          }
+        } else if (valor === 'AC') {
+          inputActual = '';
+          operador = null;
+          a = null;
+          b = null;
+          inputSpan.textContent = '';
+          resultado.textContent = '';
+        } else if (valor === 'CE') {
+          inputActual = '';
+          inputSpan.textContent = '';
+        } else if (valor === '=') {
+          if (operador && a !== null && inputActual !== '') {
+            b = parseFloat(inputActual);
+            let res;
+            switch (operador) {
+              case '+': res = suma(a, b); break;
+              case '-': res = resta(a, b); break;
+              case '*': res = multiplicacion(a, b); break;
+              case '/': res = division(a, b); break;
+            }
+            resultado.textContent = res;
+            inputActual = res.toString();
+            inputSpan.textContent = '';
+            operador = null;
+            a = null;
+            b = null;
+          }
+        } else if (valor === '√') {
+          if (inputActual !== '') {
+            a = parseFloat(inputActual);
+            let res = raiz(a);
+            resultado.textContent = res;
+            inputActual = res.toString();
+            inputSpan.textContent = '';
+          }
+        } else if (valor === 'x²') {
+          if (inputActual !== '') {
+            a = parseFloat(inputActual);
+            let res = cuadrado(a);
+            resultado.textContent = res;
+            inputActual = res.toString();
+            inputSpan.textContent = '';
+          }
+        } else {
+          if (inputActual !== '') {
+            a = parseFloat(inputActual);
+            operador = valor;
+            inputActual = '';
+            inputSpan.textContent = operador + ' ';
+          } else if (resultado.textContent !== '') {
+            a = parseFloat(resultado.textContent);
+            operador = valor;
+            inputActual = '';
+            resultado.textContent = '';
+            inputSpan.textContent = a + ' ' + operador + ' ';
+          }
+        }
+      });
+    });
+  </script>
+</body>
+</html>

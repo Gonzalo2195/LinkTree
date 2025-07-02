@@ -1,0 +1,389 @@
+<!DOCTYPE html> 
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Portafolio - Gonzalo Flores</title>
+
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <script>
+    (function(){
+      emailjs.init("Z1t67c1o52auW5MBU");
+    })();
+  </script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background-color: #ffffff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 2rem; 
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    }
+
+    nav a {
+      margin-left: 1.5rem;
+      text-decoration: none;
+      color: #1F2937;
+      font-weight: 500;
+      font-size: 1rem;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    nav a:hover {
+      color: #605ca5;
+    }
+
+    main {
+      flex: 1;
+    }
+
+    .hero {
+      background-color: #605ca5;
+      color: #ffffff;
+      padding: 100px 20px;
+      text-align: center;
+      height: 500px;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: 800;
+    }
+
+    .hero p {
+      margin-top: 1rem;
+      font-size: 1.25rem;
+    }
+
+    footer {
+      background-color: #ffffff;
+      color: #1F2937;
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    .habilidades {
+      padding: 4rem 2rem;
+      background-color: #ffffff;
+    }
+
+    .habilidadesTitulo {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      color: #1F2937;
+    }
+
+    .habilidadesGrid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .habilidad {
+      padding: 1rem;
+      background: #F9FAFB;
+      border: 1px solid #E5E7EB;
+      border-radius: 12px;
+      text-align: center;
+      font-size: 1rem;
+      color: #374151;
+      transition: all 0.3s ease;
+    }
+
+    #sobreMi {
+      padding: 4rem 2rem;
+      background-color: #F9FAFB;
+    }
+
+    #sobreMi > h2 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      color: #1F2937;
+    }
+
+    #sobreMi .contenido {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    #sobreMi .foto {
+      flex: 1;
+      min-width: 250px;
+      text-align: center;
+    }
+
+    #sobreMi .foto img {
+      width: 220px;
+      border-radius: 100px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    #sobreMi .texto {
+      flex: 2;
+      min-width: 300px;
+      padding: 1.5rem;
+      font-size: 1.1rem;
+      color: #374151;
+      line-height: 1.6;
+    }
+
+    #proyectos {
+      padding: 4rem 2rem;
+      background-color: #F9FAFB;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    #proyectos > h2 {
+      color: #1F2937;
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    #proyectos .proyectosGrid {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    #proyectos .proyectosGrid a {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 180px;
+      height: 180px;
+      background-color: #605ca5;
+      color: #ffffff;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(96, 92, 165, 0.4);
+      transition: background-color 0.3s, box-shadow 0.3s;
+    }
+
+    #contacto {
+      padding: 4rem 2rem;
+      background-color: #F9FAFB;
+    }
+
+    #contacto > h2 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      color: #1F2937;
+    }
+
+    #contacto form {
+      max-width: 600px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    #contacto form input,
+    #contacto form textarea {
+      padding: 0.75rem;
+      border: 1px solid #E5E7EB;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-family: inherit;
+      resize: vertical;
+    }
+
+    #contacto form button {
+      padding: 0.75rem;
+      background-color: #605ca5;
+      color: white;
+      font-weight: bold;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+      font-family: inherit;
+    }
+
+    #contacto form button:hover {
+      background-color: #504c8a;
+    }
+
+    .volverInicio {
+      display: flex;
+      justify-content: center;
+      margin: 2rem 0;
+    }
+
+    .volverInicio a {
+      padding: 0.75rem 1.5rem;
+      background-color: #605ca5;
+      color: white;
+      text-decoration: none;
+      border-radius: 8px;
+      font-weight: bold;
+      transition: background-color 0.3s;
+      font-family: inherit;
+    }
+
+    .volverInicio a:hover {
+      background-color: #504c8a;
+    }
+
+    @media (max-width: 768px) {
+      .hero h1 {
+        font-size: 2.2rem;
+      }
+
+      .hero p {
+        font-size: 1rem;
+      }
+
+      nav a {
+        margin-left: 1rem;
+      }
+
+      #sobreMi .contenido {
+        flex-direction: column;
+      }
+
+      #sobreMi .texto, 
+      #sobreMi .foto {
+        min-width: auto;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div><strong>Portafolio</strong></div>
+    <nav>
+      <a href="portafolio.html">Inicio</a>
+      <a href="#sobreMi">Sobre mí</a>
+      <a href="#proyectos">Proyectos</a>
+      <a href="#habilidades">Habilidades</a>
+      <a href="#contacto">Contacto</a>
+      <a href="index.html" target="_blank">Linktree</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <h1>Hola Soy<br> Gonzalo Flores</h1>
+      <p>Estudiante de Negocios Digitales enfocado en tecnología y marketing</p>
+    </section>
+
+    <section id="sobreMi">
+      <h2>Sobre mí</h2>
+      <div class="contenido">
+        <div class="foto">
+          <img src="imagenes/yo.jpeg" alt="Foto de Gonzalo" />
+        </div>
+
+        <div class="texto">
+          <p>
+            ¡Hola! Soy Gonzalo Flores, estudiante de Negocios Digitales en UADE. 
+            Me apasiona el mundo de la tecnología, 
+            el marketing y cómo las herramientas digitales pueden transformar ideas en negocios reales. 
+            <br><br>
+            Actualmente me estoy formando en desarrollo web, diseño UI y estrategias de comunicación online. 
+            Me considero una persona curiosa, enfocada en los detalles y con ganas de aprender continuamente. 
+            <br><br>
+            Mi objetivo es trabajar en proyectos innovadores,
+            crear soluciones útiles y seguir creciendo en el mundo digital.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="habilidades" class="habilidades">
+      <h2 class="habilidadesTitulo">Habilidades</h2>
+      <div class="habilidadesGrid">
+        <div class="habilidad"> HTML / CSS / JavaScript</div>
+        <div class="habilidad">Diseño UX</div>
+        <div class="habilidad"> Figma y diseño UI</div>
+        <div class="habilidad">Automatización de tareas</div>
+        <div class="habilidad">Tailwind / Flexbox / Grid</div>
+        <div class="habilidad">Arquitectura de computadoras</div>
+        <div class="habilidad">Seguridad informática</div>
+        <div class="habilidad">Publicidades</div>
+      </div>
+    </section>
+
+    <section id="proyectos">
+      <h2>Proyectos</h2>
+      <div class="proyectosGrid">
+        <a href="calculadora.html">CALCULADORA</a>
+        <a href="galeria.html">GALERIAS</a>
+        <a href="tareas.html">LISTA DE TAREAS</a>
+      </div>
+    </section>
+
+    <section id="contacto">
+      <h2>Enviar un mensaje</h2>
+      <form>
+        <input type="text" name="from_name" placeholder="Nombre completo" required>
+        <input type="email" name="reply_to" placeholder="Correo electrónico" required>
+        <input type="text" name="subject" placeholder="Asunto" required>
+        <textarea name="message" placeholder="Mensaje" required rows="5"></textarea>
+        <button type="submit">Enviar</button>
+      </form>
+    </section>
+  </main>
+
+  <div class="volverInicio">
+    <a href="#inicio">Volver al inicio</a>
+  </div>
+
+  <footer>
+    © 2025 Gonzalo Flores - Todos los derechos reservados.
+  </footer>
+
+  <script>
+    document.querySelector("#contacto form").addEventListener("submit", function(e) {
+      e.preventDefault();
+
+      emailjs.sendForm("service_18rpfef", "template_1ardhb8", this)
+        .then(() => {
+          alert("Mensaje enviado correctamente.");
+          this.reset();
+        }, (error) => {
+          alert("Error al enviar el mensaje. Intentalo de nuevo.");
+          console.error(error);
+        });
+    });
+  </script>
+</body>
+</html>

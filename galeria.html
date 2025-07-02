@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Galería con Lightbox</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      --main-color: #605ca5;
+      --text-light: #ffffff;
+      --bg-footer: #ffffff;
+      --text-dark: #1F2937;
+      --hover: #605ca5;
+    }
+
+    header {
+      background-color: #ffffff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 2rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    }
+
+    nav a {
+      margin-left: 1.5rem;
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 500;
+      font-size: 1rem;
+    }
+
+    nav a:hover {
+      color: var(--main-color);
+    }
+
+    /* Estilos para la galería */
+    .galeria {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin: 2rem;
+    }
+
+    .galeria div {
+      background-color: #ccc;
+      height: 30vh;
+      border-radius: 1rem;
+      transition: transform 0.3s ease, background-color 0.5s ease;
+    }
+
+    .galeria div:hover {
+      transform: scale(1.02);
+      background-color: #aaa;
+      cursor: pointer;
+    }
+
+    .galeria img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      display: block;
+      border-radius: 1rem;
+    }
+
+    /* Estilos para el lightbox */
+    .lightbox {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 1000;
+    }
+
+    .lightbox.active {
+      display: flex;
+    }
+
+    .lightbox-img {
+      max-width: 90vw;
+      max-height: 80vh;
+    }
+
+    .lightbox-btn {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 1100;
+      padding: 1rem 1.5rem;
+      cursor: pointer;
+      color: white;
+      background-color: var(--main-color);
+      border: none;
+      font-weight: bold;
+      border-radius: 8px;
+    }
+
+    .lightbox-btn.prev {
+      left: 2vw;
+    }
+
+    .lightbox-btn.next {
+      right: 2vw;
+    }
+
+    @media (max-width: 768px) {
+      .galeria {
+        grid-template-columns: repeat(2, 1fr);
+        margin: 1rem;
+      }
+
+      nav a {
+        margin-left: 1rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- NAVBAR -->
+  <header>
+    <div><strong>Mi Portfolio.</strong></div>
+    <nav>
+      <a href="portafolio.html#inicio">Inicio</a>
+      <a href="portafolio.html#sobre-mi">Sobre mí</a>
+      <a href="portafolio.html#proyectos">Proyectos</a>
+      <a href="portafolio.html#habilidades">Habilidades</a>
+      <a href="portafolio.html#contacto">Contacto</a>
+      <a href="index.html" target="_blank">Linktree</a>
+    </nav>
+  </header>
+
+  <!-- SECCIONES ANCLA (VACÍAS SOLO PARA SCROLL) -->
+  <section id="inicio" style="height: 1px;"></section>
+  <section id="sobre-mi" style="height: 1px;"></section>
+  <section id="proyectos" style="height: 1px;"></section>
+  <section id="habilidades" style="height: 1px;"></section>
+  <section id="contacto" style="height: 1px;"></section>
+
+  <!-- GALERÍA -->
+  <section class="galeria"></section>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox">
+    <button class="lightbox-btn prev">Anterior</button>
+    <img src="" alt="Imagen ampliada" class="lightbox-img">
+    <button class="lightbox-btn next">Siguiente</button>
+  </div>
+
+  <!-- SCRIPT -->
+  <script>
+    const totalImagenes = 9;
+    const galeria = document.querySelector('.galeria');
+
+    for (let i = 1; i <= totalImagenes; i++) {
+      const div = document.createElement('div');
+      const img = document.createElement('img');
+      img.src = `./img/img${i}.png`; // Cambiar por la ruta de las imágenes
+      img.alt = `Imagen ${i}`;
+      div.appendChild(img);
+      galeria.appendChild(div);
+    }
+
+    const lightbox = document.querySelector('.lightbox');
+    const lightboxImg = document.querySelector('.lightbox-img');
+    const imagenes = Array.from(document.querySelectorAll('.galeria img'));
+    let currentIndex = 0;
+
+    galeria.addEventListener('click', function (e) {
+      if (e.target.tagName === 'IMG') {
+        currentIndex = imagenes.indexOf(e.target);
+        mostrarImagen(currentIndex);
+        lightbox.classList.add('active');
+      }
+    });
+
+    function mostrarImagen(idx) {
+      currentIndex = (idx + imagenes.length) % imagenes.length;
+      lightboxImg.src = imagenes[currentIndex].src;
+    }
+
+    const prevBtn = document.querySelector('.lightbox-btn.prev');
+    const nextBtn = document.querySelector('.lightbox-btn.next');
+
+    prevBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      mostrarImagen(currentIndex - 1);
+    });
+
+    nextBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      mostrarImagen(currentIndex + 1);
+    });
+
+    lightbox.addEventListener('click', function () {
+      lightbox.classList.remove('active');
+      lightboxImg.src = '';
+    });
+  </script>
+</body>
+
+</html>
